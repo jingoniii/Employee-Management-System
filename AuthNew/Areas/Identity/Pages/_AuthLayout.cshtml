@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register Hover Effect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item a {
+            color: black;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+
+            .nav-item a:hover {
+                background-color: red; /* Change to the desired hover background color */
+            }
+
+        .login-logout-card {
+            background-color: #ffffff; /* Set the card background color */
+        }
+    </style>
+</head>
+
+<div class="row justify-content-center">
+    <div class="col-5 mt-5">
+        <div class="card login-logout-card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Login">
+                            Log In
+                         </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Identity/Account/Register">
+                            Register
+                         </a>    
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body" style ="background: red">
+                <div class="row justify-content-center text-dark">
+                    <div class="col-10 my-4">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(function () {
+            const currentPage = Location.pathname;
+            $('.nav-tabs li a').each(function ()){
+                const $this = $(this);
+                if (currentPage.toLowerCase().indexOf($this.attr('href').toLowerCase()) !=== -1){
+                        $this.addClass('active');
+                }
+            }
+
+        })
+    </script>
+}
